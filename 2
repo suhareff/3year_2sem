@@ -1,0 +1,23 @@
+/*cpp*/
+#include <iostream>
+
+struct Rational {
+    int num;
+    int denom;
+
+    Rational(int n, int d) {
+        int g = gcd(n, d);
+        num = n / g;
+        denom = d / g;
+    }
+
+    int func1(int a, int b) {
+        return (b == 0) ? a : func1(b, a % b);
+    }
+};
+int main() {
+    Rational ratNum(2, 4);
+    cout << "Numerator: " << ratNum.num << endl;
+    cout << "Denominator: " << ratNum.denom << endl;
+    return 0;
+}
