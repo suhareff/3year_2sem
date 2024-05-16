@@ -1,30 +1,36 @@
 /*python*/
-def calculate_area(r):
-return f"Calculated area of a circle: {3.14 * r ** 2} "
+/*создать функцию насоса(насос это пример из пахта), 
+внутри которой результатом вызова этой функции будут другие функции, 
+которые вернут тебе результат другой функции*/
+def find_h(k):
+return f"Set: k\n Found: h = {-k} ед."
 
-def calculate_radius(a):
-return f"Calculated circle radius: {((a / 3.14) ** 0.5):.2f} "
-
-def calculate_volume(l):
-return f"Calculated cube volume: {l ** 3} "
-
-def calculate_length(v):
-return f"Calculated cube edge length: {v ** (1 / 3):.2f} "
+def find_k(h):
+return f"Set: h\n Found: k = {-h} ед."
 
 def pump(*funcs):
-def wrapper(*args):
+def wrapper(h=0, k=0):
 for func in funcs:
-if "area" in func.__name__:
-print("Current Shape: Circle")
-print(func(*args))
+if "centrifugal" in func.__name__:
+print("Current pump: centrifugal")
+print(find_h(func(h, k)))
 else:
-print("Current shape: Cube")
-print(func(*args))
+print("Current pump: Plunger pump")
+print(find_k(func(h, k)))
 print()
 return wrapper
 
-pumped_circle = pump(calculate_area, calculate_radius)
-pumped_circle(5)
+@pump
+def centrifugal_pump(h=0, k=0):
+return h if h else k
+
+@pump
+def plower_pump(h=0, k=0):
+return h if h else k
+
+centrifugal_pump(k=2)
+plower_pump(h=12)
+
 
 pumped_cube = pump(calculate_volume, calculate_length)
 pumped_cube(125)
