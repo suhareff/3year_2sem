@@ -1,0 +1,29 @@
+/*cpp*/
+def find_t(c):
+    return f"Задано: {c}\nНайдено: t = {abs(c)} °C"  # Исправлено для отображения положительного значения
+
+def find_c(t):
+    return f"Задано: {t}\nНайдено: c = {abs(t)} °C"  # Исправлено для отображения положительного значения
+
+def temperature_process(*funcs):
+    def wrapper(t=0, c=0):
+        for func in funcs:
+            if "heating" in func.__name__:
+                print("Текущий процесс: нагрев")
+                print(find_c(func(c=c, t=t)))  # Исправлено для передачи параметров в правильном порядке
+            else:
+                print("Текущий процесс: охлаждение")
+                print(find_t(func(t=t, c=c)))  # Исправлено для передачи параметров в правильном порядке
+        print()
+    return wrapper
+
+@temperature_process
+def heating_process(t=0, c=0):
+    return t if t else c
+
+@temperature_process
+def cooling_process(t=0, c=0):
+    return t if t else c
+
+heating_process(c=100)
+cooling_process(t=50)
