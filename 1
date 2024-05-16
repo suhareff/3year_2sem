@@ -1,0 +1,36 @@
+/*cpp*/
+def fun1(a, b):
+    return a + b
+
+def fun2(a, b, operation):
+    if operation == '+':
+        return a + b
+    elif operation == '-':
+        return a - b
+    elif operation == '*':
+        return a * b
+    elif operation == '/':
+        if b != 0:
+            return a / b
+        else:
+            return None
+
+def fun3(fun1, fun2, sign):
+    def fun4(a, b):
+        
+        result = (1 / fun1(a, b))
+        for i in range(4):
+            a += 4
+            b += 4
+            temp = (1 / fun1(a, b))
+            result = fun2(result,temp,sign)
+        return result
+    return fun4
+
+a = int(input("Введите а: "))
+b = int(input("Введите b: "))
+sign = input("Введите знак (+, -, *, /): ")
+
+fun4 = fun3(fun1, fun2, sign)
+result = fun4(a, b)
+print("Результат:", result)
