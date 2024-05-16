@@ -1,29 +1,30 @@
-/*cpp*/
-def find_t(c):
-    return f"Задано: {c}\nНайдено: t = {abs(c)} °C"  # Исправлено для отображения положительного значения
+/*python*/
+def calculate_area(r):
+return f"Calculated area of a circle: {3.14 * r ** 2} "
 
-def find_c(t):
-    return f"Задано: {t}\nНайдено: c = {abs(t)} °C"  # Исправлено для отображения положительного значения
+def calculate_radius(a):
+return f"Calculated circle radius: {((a / 3.14) ** 0.5):.2f} "
 
-def temperature_process(*funcs):
-    def wrapper(t=0, c=0):
-        for func in funcs:
-            if "heating" in func.__name__:
-                print("Текущий процесс: нагрев")
-                print(find_c(func(c=c, t=t)))  # Исправлено для передачи параметров в правильном порядке
-            else:
-                print("Текущий процесс: охлаждение")
-                print(find_t(func(t=t, c=c)))  # Исправлено для передачи параметров в правильном порядке
-        print()
-    return wrapper
+def calculate_volume(l):
+return f"Calculated cube volume: {l ** 3} "
 
-@temperature_process
-def heating_process(t=0, c=0):
-    return t if t else c
+def calculate_length(v):
+return f"Calculated cube edge length: {v ** (1 / 3):.2f} "
 
-@temperature_process
-def cooling_process(t=0, c=0):
-    return t if t else c
+def pump(*funcs):
+def wrapper(*args):
+for func in funcs:
+if "area" in func.__name__:
+print("Current Shape: Circle")
+print(func(*args))
+else:
+print("Current shape: Cube")
+print(func(*args))
+print()
+return wrapper
 
-heating_process(c=100)
-cooling_process(t=50)
+pumped_circle = pump(calculate_area, calculate_radius)
+pumped_circle(5)
+
+pumped_cube = pump(calculate_volume, calculate_length)
+pumped_cube(125)
