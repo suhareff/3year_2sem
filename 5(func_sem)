@@ -1,0 +1,19 @@
+#Вычисление суммы значений функции для заданного диапазона
+def summation(term, a, next_term, b):
+    def iter_func(a, result):
+        if a > b:
+            return result
+        return iter_func(next_term(a), result + term(a))
+    
+    return iter_func(a, 0)
+
+def square(x):
+    return x * x
+
+def identity(x):
+    return x
+
+def increment(x):
+    return x + 1
+
+print(summation(identity, 2, square, 3))
